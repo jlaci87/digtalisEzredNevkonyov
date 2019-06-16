@@ -7,14 +7,13 @@ use App\Models\Soldier;
 
 class SoldiersController extends Controller
 {
-    
     public function create()
     {
         return view('soldiers.create');
     }
+
     public function store(Request $request)
     {
-        
         $soldier = New Soldier;
         $soldier->prefix = $request->input('prefix');
         $soldier->last_name = $request->input('lastname');
@@ -22,14 +21,28 @@ class SoldiersController extends Controller
         $soldier->group = $request->input('group');
         $soldier->save();
         
-        // dd($request);
         return redirect()->route('soldiers.index');
     }
+
     public function index()
     {
         $soldiers = Soldier::orderBy('last_name')->get();
-        // dd($soldiers);
         return view('soldiers.index')
             ->with('soldiers', $soldiers);
     }
+
+    public function destroy($newsletterId)
+    {
+        $soldier = Soldier::where('id', '=', $newsletterId)->first();
+        $soldier->delete();
+        
+        return redirect()->route('soldiers.index');
+    }
+
+//     public function edit($newsletterId)
+//     {
+//         $soldier = Soldier::where('id', '=', $newsletterId)->first();
+//         return view('soldiers.update')
+//             ->with('soldier', $soldier);
+//     }
 }

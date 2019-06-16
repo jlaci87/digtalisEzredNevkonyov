@@ -17,6 +17,10 @@
         td {
             text-align: center;
         }
+        /* .cell_bnt{
+            display: flex;
+            border: none;
+        } */
     </style>
 </head>
 <body>
@@ -32,6 +36,7 @@
             <th>Vezetéknév</th>
             <th>Keresztnév</th>
             <th>Állománycsoport</th>
+            <th></th>
         </tr>
         @foreach ($soldiers as $soldier)    
             <tr>
@@ -40,6 +45,15 @@
                 <td>{{ $soldier->last_name }}</td>
                 <td>{{ $soldier->first_name }}</td>
                 <td>{{ $soldier->group }}</td>
+                <td class="cell_bnt">
+                    <form action="{{ route('soldiers.destroy', ['soldierId' => $soldier->id]) }}" method="POST">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit">Törlés</button>
+                    </form>
+                    &nbsp;-||-&nbsp;
+                    <a href="">Mósosítás</a>
+                </td>
             </tr>
         @endforeach
     </table>
