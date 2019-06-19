@@ -7,6 +7,14 @@ use App\Models\Soldier;
 
 class SoldiersController extends Controller
 {
+    
+    public function index()
+    {
+        $soldiers = Soldier::orderBy('last_name')->get();
+        return view('soldiers.index')
+            ->with('soldiers', $soldiers);
+    }
+
     public function create()
     {
         return view('soldiers.create');
@@ -24,25 +32,20 @@ class SoldiersController extends Controller
         return redirect()->route('soldiers.index');
     }
 
-    public function index()
+    public function destroy($soldierId)
     {
-        $soldiers = Soldier::orderBy('last_name')->get();
-        return view('soldiers.index')
-            ->with('soldiers', $soldiers);
-    }
-
-    public function destroy($newsletterId)
-    {
-        $soldier = Soldier::where('id', '=', $newsletterId)->first();
+        $soldier = Soldier::where('id', '=', $soldierId)->first();
         $soldier->delete();
         
         return redirect()->route('soldiers.index');
     }
 
-//     public function edit($newsletterId)
-//     {
-//         $soldier = Soldier::where('id', '=', $newsletterId)->first();
-//         return view('soldiers.update')
-//             ->with('soldier', $soldier);
-//     }
+    public function edit($soldierId)
+    {
+        // dd($soldierId);
+        $soldier = Soldier::where('id', '=', $soldierId)->first();
+        // dd($soldier);
+        return view('soldiers.edit')
+            ->with('soldier', $soldier);
+    }
 }

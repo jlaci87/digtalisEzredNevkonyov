@@ -26,6 +26,7 @@
     </nav>
     <form action="{{ route('soldiers.store') }}" method="POST">
         {{ csrf_field() }} 
+        {{-- <input type="hidden" name="_method" value="patch"> --}}
         <label for="prefix">Előtag:</label>
         <input type="text" id="prefix" name="prefix" value="{{ $soldier->prefix }}">
         <br>

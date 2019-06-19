@@ -17,10 +17,10 @@
         td {
             text-align: center;
         }
-        /* .cell_bnt{
+        .cell_bnt{
             display: flex;
             border: none;
-        } */
+        }
     </style>
 </head>
 <body>
@@ -52,7 +52,10 @@
                         <button type="submit">Törlés</button>
                     </form>
                     &nbsp;-||-&nbsp;
-                    <a href="">Mósosítás</a>
+                    <form action="{{ route('soldiers.edit', ['soldierId' => $soldier->id]) }}" method="POST">
+                        {{ csrf_field() }}
+                        <button type="submit">Módosítás</button>
+                    </form>
                 </td>
             </tr>
         @endforeach
