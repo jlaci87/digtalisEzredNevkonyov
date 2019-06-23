@@ -1,29 +1,5 @@
-<!DOCTYPE html>
-<html lang="hu">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Rekord Módosítás</title>
-
-    <style>
-        table, th, td {
-            border: 1px solid #333;
-            border-collapse: collapse;
-        }
-        th, td {
-            width: 150px;
-        }
-        td {
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <nav class="navigation">
-        <a href="{{ route('index') }}">Főoldal</a>
-        <a href="{{ route('soldiers.index') }}">Névsor</a>
-    </nav>
+@extends('layouts.layout')
+@section('content')
     <form action="{{ route('soldiers.store') }}" method="POST">
         {{ csrf_field() }} 
         {{-- <input type="hidden" name="_method" value="patch"> --}}
@@ -45,5 +21,4 @@
         <br>
         <button type="submit">Feltöltés</button>
     </form>
-</body>
-</html>
+@stop
