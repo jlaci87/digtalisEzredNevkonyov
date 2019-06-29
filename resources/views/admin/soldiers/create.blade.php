@@ -1,6 +1,10 @@
-@extends('layouts.layout')
+@extends('admin.layouts.layout')
 @section('content')
-    <form action="{{ route('soldiers.store') }}" method="POST">
+    <form action="{{ route('admin.soldiers.store', [
+            'order_by' => request()->input('order_by'),
+            'direction' => request()->input('direction')
+        ])}}" 
+        method="POST">
         {{ csrf_field() }} 
         <label for="prefix">Előtag:</label>
         <input type="text" id="prefix" name="prefix" value="{{ old('prefix') }}">

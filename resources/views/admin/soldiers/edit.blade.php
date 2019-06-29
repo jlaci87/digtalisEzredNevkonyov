@@ -1,8 +1,13 @@
-@extends('layouts.layout')
+@extends('admin.layouts.layout')
 @section('content')
-    <form action="{{ route('soldiers.store') }}" method="POST">
+    <form action="{{ route('admin.soldiers.update', [
+            'soldierId' => $soldier->id,
+            'order_by' => request()->input('order_by'),
+            'direction' => request()->input('direction')
+        ])}}" 
+        method="POST">
         {{ csrf_field() }} 
-        {{-- <input type="hidden" name="_method" value="patch"> --}}
+        <input type="hidden" name="_method" value="put">
         <label for="prefix">Előtag:</label>
         <input type="text" id="prefix" name="prefix" value="{{ $soldier->prefix }}">
         <br>
@@ -19,6 +24,6 @@
         <input type="text" id="group" name="group" value="{{ $soldier->group }}">
         <br>
         <br>
-        <button type="submit">Feltöltés</button>
+        <button type="submit">Módosítás</button>
     </form>
 @stop

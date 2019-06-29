@@ -2,5 +2,5 @@
 @section('content')
 Digitális ezrednévkönyv!!!
 <br>
-keress kutass tölts fel!
+keress kutass!
 @stop

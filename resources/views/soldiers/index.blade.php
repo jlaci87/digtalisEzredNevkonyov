@@ -1,14 +1,62 @@
 @extends('layouts.layout')
 @section('content')
     <table>
-        <a href="{{ route('soldiers.create') }}">Új rekord hozzáadása</a>
         <tr>
-            <th>ID</th>
-            <th>Előtag</th>
-            <th>Vezetéknév</th>
-            <th>Keresztnév</th>
-            <th>Állománycsoport</th>
-            <th></th>
+            <th>
+                @if(request()->input('order_by') == 'id' && request()->input('direction') == 'desc')
+                    <a href="{{route('soldiers.index', ['order_by' => 'id', 'direction' => 'asc'])}}">
+                        ID
+                    </a>
+                @else
+                    <a href="{{route('soldiers.index', ['order_by' => 'id', 'direction' => 'desc'])}}">
+                        ID
+                    </a>
+                @endif
+            </th>
+            <th>
+                @if(request()->input('order_by') == 'prefix' && request()->input('direction') == 'desc')
+                    <a href="{{ route('soldiers.index', ['order_by' => 'prefix', 'direction' => 'asc']) }}">
+                        Előtag
+                    </a>
+                @else
+                    <a href="{{ route('soldiers.index', ['order_by' => 'prefix', 'direction' => 'desc']) }}">
+                        Előtag
+                    </a>
+                @endif
+            </th>
+            <th>
+                @if(request()->input('order_by') == 'last_name' && request()->input('direction') == 'desc')
+                    <a href="{{ route('soldiers.index', ['order_by' => 'last_name', 'direction' => 'asc']) }}">
+                        Vezetéknév
+                    </a>
+                @else
+                    <a href="{{ route('soldiers.index', ['order_by' => 'last_name', 'direction' => 'desc']) }}">
+                        Vezetéknév
+                    </a>
+                @endif
+            </th>
+            <th>
+                @if(request()->input('order_by') == 'firstname' && request()->input('direction') == 'desc')
+                    <a href="{{ route('soldiers.index', ['order_by' => 'first_name', 'direction' => 'asc']) }}">
+                        Keresztnév
+                    </a>
+                @else
+                    <a href="{{ route('soldiers.index', ['order_by' => 'first_name', 'direction' => 'desc']) }}">
+                        Keresztnév
+                    </a>
+                @endif
+            </th>
+            <th>
+                @if(request()->input('order_by') == 'group' && request()->input('direction') == 'desc')
+                    <a href="{{ route('soldiers.index', ['order_by' => 'group', 'direction' => 'asc']) }}">
+                        Állománycsoport
+                    </a>
+                @else
+                    <a href="{{ route('soldiers.index', ['order_by' => 'group', 'direction' => 'desc']) }}">
+                        Állománycsoport
+                    </a>
+                @endif
+            </th>
         </tr>
         @foreach ($soldiers as $soldier)    
             <tr>
@@ -17,17 +65,6 @@
                 <td>{{ $soldier->last_name }}</td>
                 <td>{{ $soldier->first_name }}</td>
                 <td>{{ $soldier->group }}</td>
-                <td class="cell_bnt">
-                    <form action="{{ route('soldiers.destroy', ['soldierId' => $soldier->id]) }}" method="POST">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="_method" value="delete">
-                        <button type="submit">Törlés</button>
-                    </form>
-                    &nbsp;-||-&nbsp;
-                    <a href="{{ route('soldiers.edit', ['soldierId' => $soldier->id]) }}">
-                        Módosítás
-                    </a>
-                </td>
             </tr>
         @endforeach
     </table>
